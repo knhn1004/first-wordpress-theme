@@ -1,0 +1,51 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb:latest
+    # this will break the creation of root password
+    # volumes:
+      # - ./mariadb:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 20
+ 
+  wordpress:
+    depends_on:
+      db:
+        condition:
+          service_healthy
+    image: wordpress:latest
+    ports:
+      - "8000:80"
+    restart: always
+    volumes:
+      # - ./public/:/var/www/html
+      # - ./themes/:/var/www/html/wp-content/themes/
+      # - ./plugins/:/var/www/html/wp-content/plugins/
+      - ./wp-content/:/var/www/html/wp-content/
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    restart: always
+  phpmyadmin:
+    depends_on:
+      db:
+        condition:
+          service_healthy
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8080:80"
+    restart: always
+    environment: 
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
