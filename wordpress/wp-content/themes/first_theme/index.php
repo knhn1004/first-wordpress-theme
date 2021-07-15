@@ -23,4 +23,12 @@
 		_E('Sorry, no post was found', 'firsttheme');?>
 	</p>
 <?php } ?>
+
+<?php
+$comments = 1;
+printf(_n('%s comment', ' %s comments', $comments, 'firsttheme'), $comments);
+// printf('this post have %s comments', $comments);
+
+?>
+
 <?php get_footer(); ?>
