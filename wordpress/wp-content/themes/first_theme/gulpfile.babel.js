@@ -6,6 +6,7 @@ import sourceMaps from 'gulp-sourcemaps';
 import imageMin from 'gulp-imagemin';
 import del from 'del';
 import webpack from 'webpack-stream';
+import uglify from 'gulp-uglify';
 const sass = require('gulp-sass')(require('sass'));
 
 const PRODUCTION = yargs.argv.prod;
@@ -81,6 +82,7 @@ export const scripts = () => {
         mode: PRODUCTION ? 'production' : 'development',
       })
     )
+    .pipe(gulpIf(PRODUCTION, uglify()))
     .pipe(gulp.dest(paths.scripts.dest));
 };
 
