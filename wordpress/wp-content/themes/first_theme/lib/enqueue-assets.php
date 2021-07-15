@@ -23,7 +23,7 @@ add_action('wp_enqueue_scripts', 'firsttheme_assets');
 function firsttheme_admin_assets() {
 	wp_enqueue_style(
 		'firsttheme-style', 
-		get_template_directory_uri() . '/dist/assets/css/bundle.css',
+		get_template_directory_uri() . '/dist/assets/css/admin.css',
 		array(),
 		'1.0.0',
 		'all'
