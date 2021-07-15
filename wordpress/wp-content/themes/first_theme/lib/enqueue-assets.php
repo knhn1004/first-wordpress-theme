@@ -8,6 +8,7 @@ function firsttheme_assets() {
 		'1.0.0',
 		'all'
 	);
+	wp_enqueue_script('jquery');
 
 	wp_enqueue_script(
 		'firsttheme-scripts',
