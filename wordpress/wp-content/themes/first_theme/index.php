@@ -20,14 +20,21 @@
 <?php } else { ?>
 	<p>
 	<?php
-		_E('Sorry, no post was found', 'firsttheme');?>
+		esc_html_e('Sorry, no post was found', 'firsttheme');?>
 	</p>
 <?php } ?>
 
 <?php
-$comments = 1;
-printf(_n('%s comment', ' %s comments', $comments, 'firsttheme'), $comments);
-// printf('this post have %s comments', $comments);
+$city = 'London';
+
+// echo esc_html__('Your city is ', 'firsttheme') . $city;
+
+printf(
+	/* translators: %s is the city name */
+	esc_html__('Your city is %s', 'firsttheme'),
+	$city
+);
+
 
 ?>
 
