@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <?php if(have_posts()) {?>
 	<?php while(have_posts()) {?>
 		<?php the_post(); ?>
@@ -19,7 +18,9 @@
 	<?php the_posts_pagination() ?>
 
 <?php } else { ?>
-	<p>sorry no posts were found</p>
+	<p>
+	<?php
+		_E('Sorry, no post was found', 'firsttheme');?>
+	</p>
 <?php } ?>
-
 <?php get_footer(); ?>
