@@ -4,8 +4,8 @@ services:
   db:
     image: mariadb:latest
     # this will break the creation of root password
-    # volumes:
-      # - ./mariadb:/var/lib/mysql
+    volumes:
+      - wordpress-db:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -27,10 +27,7 @@ services:
       - "8000:80"
     restart: always
     volumes:
-      # - ./public/:/var/www/html
-      # - ./themes/:/var/www/html/wp-content/themes/
-      # - ./plugins/:/var/www/html/wp-content/plugins/
-      - ./wp-content/:/var/www/html/wp-content/
+      - ./wordpress/:/var/www/html/
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
@@ -49,3 +46,6 @@ services:
     environment: 
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: password
+
+volumes:
+  wordpress-db:
