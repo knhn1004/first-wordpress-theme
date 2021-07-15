@@ -5,6 +5,7 @@ import gulpIf from 'gulp-if';
 import sourceMaps from 'gulp-sourcemaps';
 import imageMin from 'gulp-imagemin';
 import del from 'del';
+import webpack from 'webpack-stream';
 const sass = require('gulp-sass')(require('sass'));
 
 const PRODUCTION = yargs.argv.prod;
@@ -17,6 +18,10 @@ const paths = {
   images: {
     src: 'src/assets/images/**/*.{jpg,jpeg,png,svg,gif}',
     dest: 'dist/assets/images',
+  },
+  scripts: {
+    src: 'src/assets/js/bundle.js',
+    dest: 'dist/assets/js',
   },
   other: {
     src: [
@@ -49,6 +54,34 @@ export const images = () => {
 
 export const copy = () => {
   return gulp.src(paths.other.src).pipe(gulp.dest(paths.other.dest));
+};
+
+export const scripts = () => {
+  return gulp
+    .src(paths.scripts.src)
+    .pipe(
+      webpack({
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-env'],
+                },
+              },
+            },
+          ],
+        },
+        output: {
+          filename: 'bundle.js',
+        },
+        devtool: !PRODUCTION ? 'inline-source-map' : false,
+        mode: PRODUCTION ? 'production' : 'development',
+      })
+    )
+    .pipe(gulp.dest(paths.scripts.dest));
 };
 
 export const watch = () => {
