@@ -9,12 +9,12 @@
 		</a>
 		</h2>
 		<div>
-			<?php post_meta() ?>
+			<?php firsttheme_post_meta() ?>
 		</div>
 		<div>
 			<?php the_excerpt() ?>
 		</div>
-		<?php readmore_link(); ?>
+		<?php firsttheme_readmore_link(); ?>
 	<?php }?>
 	<?php the_posts_pagination() ?>
 
