@@ -4,6 +4,7 @@ import cleanCSS from 'gulp-clean-css';
 import gulpIf from 'gulp-if';
 import sourceMaps from 'gulp-sourcemaps';
 import imageMin from 'gulp-imagemin';
+import del from 'del';
 const sass = require('gulp-sass')(require('sass'));
 
 const PRODUCTION = yargs.argv.prod;
@@ -26,6 +27,8 @@ const paths = {
     dest: 'dist/assets',
   },
 };
+
+export const clean = () => del(['dist']);
 
 export const styles = () => {
   return gulp
@@ -50,4 +53,15 @@ export const copy = () => {
 
 export const watch = () => {
   gulp.watch('src/assets/scss/**/*.scss', styles);
+  gulp.watch(paths.images.src, images);
+  gulp.watch(paths.other.src, copy);
 };
+
+export const dev = gulp.series(
+  clean,
+  gulp.parallel(styles, images, copy),
+  watch
+);
+export const build = gulp.series(clean, gulp.parallel(styles, images, copy));
+
+export default dev;
