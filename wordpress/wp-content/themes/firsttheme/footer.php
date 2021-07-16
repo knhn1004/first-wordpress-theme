@@ -2,7 +2,14 @@
 $footer_layout = '3,3,3,3';
 $columns = explode(',', $footer_layout);
 $footer_bg = 'dark';
+$widgets_active = false;
+foreach ($columns as $i => $column) {
+    if (is_active_sidebar('footer-sidebar-' . ($i + 1))) {
+        $widgets_active = true;
+    }
+}
 ?>
+<?php if ($widgets_active) { ?>
 		<div class="c-footer c-footer--<?php echo $footer_bg; ?>">
 			<div class="o-container">
 				<div class="o-row">
@@ -13,6 +20,16 @@ $footer_bg = 'dark';
        } ?>
 						</div>
 					<?php } ?>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+		<div class="c-site-info c-site-info--<?php echo $footer_bg; ?>">
+			<div class="o-container">
+				<div class="o-row">
+					<div class="o-row__column o-row__column--span-12 c-site-info__text">
+						All Rights Reseved
+					</div>
 				</div>
 			</div>
 		</div>
