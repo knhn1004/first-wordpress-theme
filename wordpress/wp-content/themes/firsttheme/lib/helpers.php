@@ -29,8 +29,8 @@ if (!function_exists('_themename_post_meta')) {
 
 function _themename_readmore_link()
 {
-    echo '<a href="' .
-        esc_url(get_the_permalink()) .
+    echo '<a class="c-post__readmore" href="' .
+        esc_url(get_permalink()) .
         '" title="' .
         the_title_attribute(['echo' => false]) .
         '">';
@@ -38,15 +38,16 @@ function _themename_readmore_link()
     printf(
         wp_kses(
             __(
-                'Read More <span class="u-screen-reader-text">About %',
+                'Read More <span class="u-screen-reader-text">About %s</span>',
                 '_themename'
             ),
             [
                 'span' => [
                     'class' => [],
                 ],
-            ],
-            get_the_title() . '</span></a>'
-        )
+            ]
+        ),
+        get_the_title()
     );
+    echo '</a>';
 }
