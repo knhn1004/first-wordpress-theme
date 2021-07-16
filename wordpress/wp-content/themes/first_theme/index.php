@@ -8,30 +8,30 @@
 		</a>
 		</h2>
 		<div>
-			<?php firsttheme_post_meta() ?>
+			<?php _themename_post_meta() ?>
 		</div>
 		<div>
 			<?php the_excerpt() ?>
 		</div>
-		<?php firsttheme_readmore_link(); ?>
+		<?php _themename_readmore_link(); ?>
 	<?php }?>
 	<?php the_posts_pagination() ?>
 
 <?php } else { ?>
 	<p>
 	<?php
-		esc_html_e('Sorry, no post was found', 'firsttheme');?>
+		esc_html_e('Sorry, no post was found', '_themename');?>
 	</p>
 <?php } ?>
 
 <?php
 $city = 'London';
 
-// echo esc_html__('Your city is ', 'firsttheme') . $city;
+// echo esc_html__('Your city is ', '_themename') . $city;
 
 printf(
 	/* translators: %s is the city name */
-	esc_html__('Your city is %s', 'firsttheme'),
+	esc_html__('Your city is %s', '_themename'),
 	$city
 );
 

@@ -10,6 +10,8 @@ import uglify from 'gulp-uglify';
 import named from 'vinyl-named';
 import browserSync from 'browser-sync';
 import zip from 'gulp-zip';
+import replace from 'gulp-replace';
+import info from './package.json';
 const sass = require('gulp-sass')(require('sass'));
 
 const server = browserSync.create();
@@ -136,7 +138,8 @@ export const watch = () => {
 export const compress = () => {
   return gulp
     .src(paths.package.src)
-    .pipe(zip('firsttheme.zip'))
+    .pipe(replace('_themename', info.name))
+    .pipe(zip(`${info.name}.zip`))
     .pipe(gulp.dest(paths.package.dest));
 };
 
