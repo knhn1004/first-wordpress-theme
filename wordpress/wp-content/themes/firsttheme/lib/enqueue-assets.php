@@ -10,6 +10,9 @@ function _themename_assets()
         'all'
     );
 
+    include get_template_directory() . '/lib/inline-css.php';
+    wp_add_inline_style('_themename-style', $inline_styles);
+
     wp_enqueue_script(
         '_themename-scripts',
         get_template_directory_uri() . '/dist/assets/js/bundle.js',
