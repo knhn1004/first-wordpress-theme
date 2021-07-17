@@ -2,6 +2,8 @@
 
 function _themename_customize_register($wp_customize)
 {
+    $wp_customize->get_setting('blogname')->transport = 'postMessage';
+
     $wp_customize->add_section('_themename_footer_options', [
         'title' => esc_html__('Footer Options', '_themename'),
         'description' => esc_html__(
@@ -14,6 +16,7 @@ function _themename_customize_register($wp_customize)
     $wp_customize->add_setting('_themename_site_info', [
         'default' => '',
         'sanitize_callback' => '_themename_sanitize_site_info',
+        'transport' => 'postMessage',
     ]);
     $wp_customize->add_control('_themename_site_info', [
         'type' => 'text',
