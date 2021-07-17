@@ -14,7 +14,11 @@ function _themename_customize_register($wp_customize)
     ]);
 
     $wp_customize->selective_refresh->add_partial('_themename_footer_partial', [
-        'settings' => ['_themename_site_info', '_themename_footer_bg'],
+        'settings' => [
+            '_themename_site_info',
+            '_themename_footer_bg',
+            '_themename_footer_layout',
+        ],
         'selector' => '#footer',
         'container_inclusive' => false,
         'render_callback' => function () {
@@ -57,6 +61,30 @@ function _themename_customize_register($wp_customize)
         ],
         'section' => '_themename_footer_options',
     ]);
+
+    $wp_customize->add_setting('_themename_footer_layout', [
+        'default' => '3,3,3,3',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+        'validate_callback' => '_themename_validate_footer_layout',
+    ]);
+
+    $wp_customize->add_control('_themename_footer_layout', [
+        'type' => 'text',
+        'label' => esc_html__('Footer Layout', '_themename'),
+        'section' => '_themename_footer_options',
+    ]);
+}
+
+function _themename_validate_footer_layout($validity, $value)
+{
+    if (!preg_match('/^([1-9]|1[012])(,([1-9]|1[012]))*$/', $value)) {
+        $validity->add(
+            'invalid_footer_layout',
+            esc_html__('Footer layout is invalid', '_themename')
+        );
+    }
+    return $validity;
 }
 
 add_action('customize_register', '_themename_customize_register');
