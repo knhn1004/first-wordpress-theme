@@ -15,4 +15,7 @@ if (!defined('WPINC')) {
     die();
 }
 
+include_once 'includes/metaboxes.php';
+include_once 'includes/enqueue-assets.php';
+
 ?>
