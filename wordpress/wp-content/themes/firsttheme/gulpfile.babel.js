@@ -35,6 +35,10 @@ const paths = {
     ],
     dest: 'dist/assets/js',
   },
+  plugins: {
+    src: ['../../plugins/_themename-metaboxes/packaged/*'],
+    dest: ['lib/plugins'],
+  },
   other: {
     src: [
       'src/assets/**/*',
@@ -95,7 +99,8 @@ export const images = () => {
 export const copy = () => {
   return gulp.src(paths.other.src).pipe(gulp.dest(paths.other.dest));
 };
-
+export const copyPlugins = () =>
+  gulp.src(paths.plugins.src).pipe(gulp.dest(paths.plugins.dest));
 export const scripts = () => {
   return gulp
     .src(paths.scripts.src)
@@ -161,7 +166,8 @@ export const dev = gulp.series(
 
 export const build = gulp.series(
   clean,
-  gulp.parallel(styles, scripts, images, copy)
+  gulp.parallel(styles, scripts, images, copy),
+  copyPlugins
 );
 
 export const bundle = gulp.series(build, compress);
