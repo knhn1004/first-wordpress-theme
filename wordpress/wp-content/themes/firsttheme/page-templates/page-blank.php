@@ -8,16 +8,15 @@ get_header(); ?>
      the_post(); ?>
 	 <article <?php post_class(); ?>>
 		<?php the_content(); ?>
-		<?php
-  $c = get_the_content();
-  echo 'Initial <br />';
-  echo $c;
-  echo '<br><br>';
-  $c = wpautop($c);
-  echo 'wpautop <br>';
-  echo esc_html($c);
-  echo '<br><br>';
-  ?>
+		<?php $c = get_the_content();
+     //   echo 'Initial <br />';
+     //   echo $c;
+     //   echo '<br><br>';
+     //   $c = wpautop($c);
+     //   echo 'wpautop <br>';
+     //   echo esc_html($c);
+     //   echo '<br><br>';
+     ?>
 	</article>
 	<?php
  } ?>
