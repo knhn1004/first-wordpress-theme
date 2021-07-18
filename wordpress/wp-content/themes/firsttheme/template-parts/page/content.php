@@ -5,6 +5,12 @@
         </h1>
     </header>
     <div class="c-page__content">
-        <?php the_content(); ?>
+        <?php
+//the_content();
+?>
+        <?php
+        $c = get_the_content();
+        echo $c;
+        ?>
     </div>
 </article>
