@@ -10,7 +10,7 @@ require_once 'lib/include-plugins.php';
 require_once 'lib/comment-callback.php';
 // require_once 'lib/metaboxes.php';
 
-function _themename_button($atts)
+function _themename_button($atts = [], $content = null, $tag = '')
 {
     extract(
         shortcode_atts(
@@ -18,13 +18,14 @@ function _themename_button($atts)
                 'color' => 'red',
                 'text' => 'Button',
             ],
-            $atts
+            $atts,
+            $tag
         )
     );
     return '<button style="background-color: ' .
         esc_attr($color) .
         '">' .
-        esc_html__($text) .
+        do_shortcode($content) .
         '</button>';
 }
 
