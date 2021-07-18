@@ -17,6 +17,17 @@ function _themename_register_required_plugins()
             'force_activation' => false,
             'force_deactivation' => false,
         ],
+        [
+            'name' => '_themename shortcodes',
+            'slug' => '_themename-shortcodes',
+            'src' =>
+                get_template_directory_uri() .
+                './lib/plugins/_themename-shortcodes.zip',
+            'required' => true,
+            'version' => '1.0.0',
+            'force_activation' => false,
+            'force_deactivation' => false,
+        ],
     ];
     $config = [];
     tgmpa($plugins, $config);
